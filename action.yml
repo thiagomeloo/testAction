@@ -1,0 +1,26 @@
+name: 'Run commands In SSH'
+description: 'Run commands In SSH'
+inputs: 
+  ssh-private-key:
+    description: 'SSH private key'
+    required: true
+  ssh-host:
+    description: 'SSH host'
+    required: true
+  ssh-user:
+    description: 'SSH user'
+    required: true
+  ssh-port:
+    description: 'SSH port'
+    required: false
+    default: 22
+  ssh-commands:
+    description: 'SSH commands'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Access SSH'
+      run: |
+        ssh -i ${{ inputs.ssh-private-key }} -p ${{ inputs.ssh-port }} ${{ inputs.ssh-user }}@${{ inputs.ssh-host }}
+        ${{ inputs.ssh-commands }}

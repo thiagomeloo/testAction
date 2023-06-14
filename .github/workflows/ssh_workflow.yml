@@ -1,0 +1,23 @@
+name: SSH Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ssh-access:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+
+      - name: Executar Acesso SSH
+        uses: ./ 
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-host: ${{ secrets.SSH_HOST }}
+          ssh-user: ${{ secrets.SSH_USER }}
+          ssh-commands: |
+            echo "Done!"
