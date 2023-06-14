@@ -21,6 +21,7 @@ runs:
   using: 'composite'
   steps:
     - name: 'Access SSH'
+      shell: bash
       run: |
         ssh -i ${{ inputs.ssh-private-key }} -p ${{ inputs.ssh-port }} ${{ inputs.ssh-user }}@${{ inputs.ssh-host }}
         ${{ inputs.ssh-commands }}
